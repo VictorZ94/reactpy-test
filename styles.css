@@ -2,3 +2,7 @@
   background-color: aquamarine;
   font-size: 12rem;
 }
+
+div {
+  background-color: blue !important;
+}
