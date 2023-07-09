@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from reactpy import component, html, hooks
-from reactpy.backend.fastapi import configure
+from reactpy.backend.fastapi import configure, Options
 
 @component
 def Counter():
@@ -20,11 +20,19 @@ def Counter():
     )
   )
 
-
 @component
 def AppMain():
   return html._(
-    html.link(
+    html.div({"class_name":"title"},
+      html.h1('Hello Victor to Reactpy')       
+    ),
+    html.div(
+      Counter()
+    )
+  )
+
+app = FastAPI()
+configure(app, AppMain, Options(head=(html.link(
       {
         "href": "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
         "rel": "stylesheet",
@@ -32,11 +40,10 @@ def AppMain():
         "integrity": "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       }
     ),
-    html.h1('Hello Victor to Reactpy'),
-    html.div(
-      Counter()
+    html.link(
+      {
+        "rel": "stylesheet",
+        "href": "styles.css"
+      }
     )
-  )
-
-app = FastAPI()
-configure(app, AppMain)
+  )))
